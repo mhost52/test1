@@ -1,0 +1,1198 @@
+jenkins
+a884867970474c549ccbd1f0e9eb3f78
+
+github leuwi
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOnkzNej2mcWqD7QoxSXc7mSo/4EavaOi1R4uaMhVvLq
+
+ngrok
+
+ngrok config add-authtoken HMX3BP2LU3I2ETBJ5UE3D7XAMUGYF6OT
+ngrok config add-authtoken 30tSniseUCGQjTmi1RS8FrZS0Wi_4vZ63HMeKrdMqeqzRC2r5
+
+HMX3BP2LU3I2ETBJ5UE3D7XAMUGYF6OT
+key klo kekunci
+KDRWY8SHNX
+JNY6QUMRVS
+DDXMWKSGR7
+TYUTGDA8SM
+UZZDGSTX79
+SSADGQRRTU
+2969PUJ9ZE
+3RQWN7N889
+AXYWWVFM4J
+AMP3235WCH
+
+ngrok config
+Run the following command to add your authtoken to the default ngrok.yml configuration file.
+ngrok config add-authtoken 30tSniseUCGQjTmi1RS8FrZS0Wi_4vZ63HMeKrdMqeqzRC2r5
+
+Put your app online at an ephemeral domain forwarding to your upstream service. For example, if it is listening on port http://localhost:8080, run:
+Copy code
+ngrok http http://localhost:8080
+
+
+Mantap! Setelah kamu berhasil mengunduh `jenkins.msi`, kamu tinggal lanjut ke proses instalasi. Berikut langkah-langkahnya:
+
+### 🛠️ Langkah Instalasi Jenkins di Windows
+
+1. **Pastikan Java Sudah Terinstal**
+   - Jenkins membutuhkan Java (JDK atau JRE) untuk berjalan.
+   - Disarankan menggunakan Java 11 atau Java 17.
+   - Kalau belum punya, kamu bisa unduh dari [situs resmi Oracle](https://www.oracle.com/java/technologies/javase-downloads.html) atau gunakan OpenJDK.
+
+2. **Jalankan File `jenkins.msi`**
+   - Klik dua kali file `jenkins.msi` untuk memulai wizard instalasi.
+   - Ikuti petunjuk di layar: klik **Next**, pilih folder instalasi, dan lanjutkan.
+
+3. **Pilih Pengguna untuk Menjalankan Jenkins**
+   - Disarankan memilih “Run service as LocalSystem” jika kamu belum punya akun domain khusus.
+
+4. **Tentukan Port**
+   - Biasanya Jenkins berjalan di port `8080`. Kamu bisa ubah jika port itu sudah dipakai.
+
+5. **Pilih Lokasi Java**
+   - Installer akan mendeteksi lokasi Java otomatis. Kalau tidak, kamu bisa masukkan path-nya secara manual.
+
+6. **Mulai Instalasi**
+   - Klik **Install** dan tunggu proses selesai. Setelah itu klik **Finish**.
+
+7. **Buka Jenkins di Browser**
+   - Akses Jenkins lewat `http://localhost:8080`.
+   - Kamu akan diminta memasukkan password admin awal yang bisa ditemukan di:
+     ```
+     C:\Program Files\Jenkins\secrets\initialAdminPassword
+     ```
+
+8. **Install Plugin dan Buat Admin User**
+   - Pilih “Install suggested plugins”.
+   - Buat akun admin untuk login ke Jenkins.
+
+---
+
+### 🎥 Video Tutorial yang Bisa Membantu
+
+- [How to Install Jenkins on Windows 11 (2025)](https://www.youtube.com/watch?v=raWbMrKl2Ow&vl=en) — Panduan lengkap dan terbaru untuk Windows 11.
+- [How to Install Jenkins on Windows 10/11 [2025 Update]](https://www.youtube.com/watch?v=ze99iHjVr_U) — Cocok untuk semua versi Windows modern.
+- [How to Install Jenkins and Build CI/CD Pipelines on Windows](https://www.youtube.com/watch?v=M5nOIklD7SA) — Menjelaskan instalasi sekaligus cara membuat pipeline pertama.
+- [How to install Jenkins in Windows 11/10/8/7](https://m.youtube.com/watch?v=4w9A9bSYbSE) — Tutorial step-by-step untuk semua versi Windows.
+- [How To Install Jenkins on Windows 11](https://www.youtube.com/watch?v=Zdxko2bPAAw) — Penjelasan konsep Jenkins dan cara instalasinya.
+- [How to Install Jenkins on Windows](https://www.youtube.com/watch?v=XuMrEDA8cAI) — Menjelaskan konfigurasi tambahan seperti environment variable dan backup.
+
+Kalau kamu sudah sampai tahap login ke Jenkins, aku bisa bantu bikin job pertama atau setup pipeline. Mau lanjut ke situ? 😄
+
+--------------------------------
+
+Ya, Jenkins **bisa mendeteksi push baru di GitHub secara otomatis** dengan bantuan fitur yang disebut **webhook**.
+
+### 🔗 Cara Kerja Webhook GitHub ke Jenkins
+
+- GitHub mengirimkan notifikasi ke Jenkins setiap kali ada event seperti **push**, **pull request**, atau **merge**.
+- Jenkins menerima notifikasi itu melalui URL khusus (`/github-webhook/`) dan langsung menjalankan job atau pipeline yang sudah dikonfigurasi.
+
+### 🧩 Langkah-Langkah Integrasi Webhook
+
+1. **Install Plugin GitHub di Jenkins**
+   - Pastikan plugin GitHub dan GitHub Integration sudah terpasang di Jenkins.
+
+2. **Buat Job di Jenkins**
+   - Gunakan opsi “GitHub hook trigger for GITScm polling” saat membuat job.
+   - Pastikan Jenkins terhubung ke repo GitHub kamu via Git.
+
+3. **Tambahkan Webhook di GitHub**
+   - Masuk ke repo GitHub → Settings → Webhooks → Add webhook.
+   - Isi `Payload URL` dengan:  
+     ```
+     http://<jenkins-server>/github-webhook/
+     ```
+   - Pilih event yang ingin dipantau, misalnya “Just the push event”.
+
+4. **Pastikan Jenkins Bisa Diakses dari Internet**
+   - Kalau Jenkins kamu lokal, gunakan tools seperti **ngrok** untuk expose ke publik.
+
+5. **Gunakan Token GitHub**
+   - Untuk mode otomatis, Jenkins bisa mendaftarkan webhook sendiri jika kamu memberikan **GitHub OAuth token** dengan scope `admin:repo_hook`.
+
+---
+
+Dengan setup ini, setiap kali kamu push ke GitHub, Jenkins akan langsung tahu dan bisa menjalankan build atau pipeline tanpa perlu polling manual. Mau aku bantu bikin pipeline pertama kamu juga? 😄
+
+
+Keren! Kamu sudah sampai tahap yang seru: otomatisasi deployment lokal lewat Jenkins. Kita bisa bikin Jenkins menyalin file web dari GitHub ke folder tertentu di drive C setiap kali kamu push. Berikut langkah-langkahnya:
+
+---
+
+### 🚀 Tujuan
+Setiap kali kamu push ke GitHub, Jenkins akan:
+1. Menarik (pull) perubahan dari repo GitHub.
+2. Menyalin file ke folder lokal, misalnya: `C:\JenkinsWeb`.
+
+---
+
+### 🧩 Langkah Konfigurasi
+
+#### 1. **Buat Folder Tujuan**
+- Buat folder di `C:\JenkinsWeb` atau lokasi lain yang kamu inginkan.
+- Pastikan Jenkins punya izin tulis ke folder tersebut.
+
+#### 2. **Buat Job Baru di Jenkins**
+- Pilih **Freestyle project** atau **Pipeline**, sesuai preferensi kamu.
+
+#### 3. **Konfigurasi GitHub Repository**
+- Di bagian *Source Code Management*, pilih **Git**.
+- Masukkan URL repo GitHub kamu.
+- Tambahkan kredensial jika repo bersifat private.
+
+#### 4. **Aktifkan Webhook GitHub**
+- Di GitHub: Settings → Webhooks → Add webhook.
+- Isi `Payload URL` dengan:
+  ```
+  http://<IP atau domain Jenkins>/github-webhook/
+  ```
+- Pilih event: “Just the push event”.
+
+#### 5. **Tambahkan Build Step untuk Menyalin File**
+- Tambahkan *Build Step* → “Execute Windows batch command”.
+- Isi dengan perintah seperti ini:
+  ```bat
+  xcopy /E /Y "%WORKSPACE%\*" "C:\JenkinsWeb\"
+  ```
+  - `%WORKSPACE%` adalah folder tempat Jenkins clone repo kamu.
+  - `/E` untuk menyalin semua subfolder.
+  - `/Y` untuk overwrite tanpa konfirmasi.
+
+#### 6. **(Opsional) Tambahkan Post-build Action**
+- Bisa tambahkan notifikasi, atau trigger job lain setelah copy selesai.
+
+---
+
+### 🧪 Contoh Sederhana Pipeline Script
+
+Kalau kamu pakai **Pipeline**, ini contoh `Jenkinsfile`:
+
+```groovy
+pipeline {
+    agent any
+    triggers {
+        githubPush()
+    }
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git 'https://github.com/username/repo-web.git'
+            }
+        }
+        stage('Copy to Local Folder') {
+            steps {
+                bat 'xcopy /E /Y "%WORKSPACE%\\*" "C:\\JenkinsWeb\\"'
+            }
+        }
+    }
+}
+```
+
+---
+
+Kalau kamu mau lanjut ke tahap berikutnya, seperti auto-reload web lokal atau bikin preview server, aku bisa bantu juga. Mau kita bikin web-nya pakai HTML biasa, atau pakai framework seperti React atau Laravel? 😄
+
+
+Tentu! Berikut cara kamu bisa menghubungkan Git lokal ke repository GitHub `https://github.com/mhost52/test1`:
+
+---
+
+### 🔧 Langkah-Langkah Koneksi Git ke GitHub
+
+#### 1. **Pastikan Git Sudah Terinstal**
+- Cek dengan perintah:
+  ```bash
+  git --version
+  ```
+- Kalau belum terinstal, kamu bisa unduh dari [situs resmi Git](https://git-scm.com/downloads) dan ikuti panduan instalasi.
+
+#### 2. **Clone Repository GitHub**
+Kalau kamu ingin langsung mengambil isi repo ke komputer lokal:
+```bash
+git clone https://github.com/mhost52/test1.git
+```
+Ini akan membuat folder `test1` berisi semua file dari repo tersebut.
+
+#### 3. **(Opsional) Konfigurasi Git Lokal**
+Kalau kamu belum pernah pakai Git sebelumnya, set nama dan email:
+```bash
+git config --global user.name "Nama Kamu"
+git config --global user.email "emailkamu@example.com"
+```
+
+#### 4. **Mulai Bekerja di Folder Repo**
+Masuk ke folder hasil clone:
+```bash
+cd test1
+```
+Lalu kamu bisa mulai edit file, commit, dan push.
+
+#### 5. **Push Perubahan ke GitHub**
+Setelah kamu ubah file dan commit:
+```bash
+git add .
+git commit -m "Pesan commit"
+git push origin main
+```
+> Pastikan branch-nya `main` atau `master`, tergantung repo-nya.
+
+#### 6. **(Opsional) Gunakan SSH untuk Koneksi Aman**
+Kalau kamu ingin koneksi tanpa password tiap push:
+- Buat SSH key: `ssh-keygen -t ed25519 -C "emailkamu@example.com"`
+- Tambahkan public key ke GitHub: Settings → SSH and GPG keys
+- Clone dengan SSH:
+  ```bash
+  git clone git@github.com:mhost52/test1.git
+  ```
+
+---
+
+Kalau kamu ingin Jenkins otomatis pull dari repo ini saat ada push, kita bisa lanjut ke integrasi webhook atau pipeline. Mau lanjut ke sana? 😄
+
+Mantap, tinggal satu langkah lagi untuk menyimpan perubahanmu ke GitHub! Berikut langkah-langkahnya supaya kamu bisa **push ke `git@github.com:mhost52/test1.git`** dengan lancar:
+
+---
+
+### ✅ Langkah Push ke GitHub via SSH
+
+1. **Cek Status Git**
+   Pastikan kamu sudah di dalam folder project:
+   ```bash
+   git status
+   ```
+
+2. **Tambahkan Perubahan**
+   Tambahkan semua file yang berubah:
+   ```bash
+   git add .
+   ```
+
+3. **Commit Perubahan**
+   Buat commit dengan pesan yang deskriptif:
+   ```bash
+   git commit -m "update fitur halaman web"
+   ```
+
+4. **Push ke Repo GitHub via SSH**
+   Pastikan remote-nya sudah pakai alamat SSH:
+   ```bash
+   git remote -v
+   ```
+   Harusnya muncul:
+   ```
+   origin  git@github.com:mhost52/test1.git (fetch)
+   origin  git@github.com:mhost52/test1.git (push)
+   ```
+   Kalau belum, ubah dengan:
+   ```bash
+   git remote set-url origin git@github.com:mhost52/test1.git
+   ```
+
+   Lalu jalankan:
+   ```bash
+   git push origin main
+   ```
+   > Ganti `main` kalau branch kamu bukan `main`.
+
+5. **Autentikasi via SSH**
+   Kalau Git meminta password atau gagal autentikasi:
+   - Pastikan kamu sudah punya SSH key:  
+     ```bash
+     ls ~/.ssh
+     ```
+   - Kalau belum, buat SSH key:
+     ```bash
+     ssh-keygen -t ed25519 -C "emailkamu@example.com"
+     ```
+   - Tambahkan public key ke GitHub:  
+     Salin isi dari `~/.ssh/id_ed25519.pub` dan tambahkan ke GitHub → Settings → SSH and GPG Keys.
+
+---
+
+Kalau sudah selesai, kamu akan lihat log sukses seperti:
+
+```
+Enumerating objects: ...
+Counting objects: ...
+Compressing objects: ...
+Writing objects: ...
+To github.com:mhost52/test1.git
+```
+
+Mau lanjut ke integrasi Jenkins agar setiap push ini langsung trigger deployment ke `C:\JenkinsWeb`? 😄
+
+Keren, kamu lagi bikin SSH key biar bisa push ke GitHub tanpa harus masukkan username dan password tiap kali. Saat muncul prompt:
+
+```
+Enter file in which to save the key (C:\Users\BC/.ssh/id_ed25519):
+```
+
+Kamu bisa langsung **tekan Enter** saja kalau kamu setuju dengan lokasi default (`C:\Users\BC\.ssh\id_ed25519`). Itu yang paling umum dipakai dan Git otomatis bisa mengenali file tersebut nanti.
+
+Kalau kamu ingin menyimpan di lokasi lain atau beri nama khusus, kamu bisa ketik path yang diinginkan, misalnya:
+```
+C:\jenkinbegin\test1\my_custom_key
+```
+
+Setelah itu proses akan lanjut:
+- Kamu akan diminta buat passphrase (boleh kosong, tinggal tekan Enter dua kali).
+- Lalu akan muncul pesan bahwa file public dan private sudah dibuat.
+
+Langkah selanjutnya adalah:
+1. **Salin isi file public key** (`id_ed25519.pub`)
+2. Buka GitHub → Settings → SSH and GPG Keys → New SSH Key
+3. Paste key tersebut dan simpan.
+
+Begitu GitHub mengenali key ini, kamu bisa langsung `git push` tanpa login. Mau aku bantu cek cara menambahkan ke GitHub atau ngetes apakah kunci sudah bekerja? 😄
+
+Siap! Kalau kamu sudah ada di halaman **Configure** untuk `job1`, kamu tinggal ikuti langkah-langkah berikut untuk menghubungkan Jenkins ke GitHub:
+
+---
+
+### 🔗 Langkah Integrasi GitHub ke Jenkins Job
+
+#### 1. **Source Code Management**
+- Di bagian **Source Code Management**, pilih **Git**.
+- Masukkan URL repo GitHub kamu:
+  ```
+  https://github.com/mhost52/test1.git
+  ```
+  atau kalau pakai SSH:
+  ```
+  git@github.com:mhost52/test1.git
+  ```
+
+#### 2. **Tambahkan Credential GitHub**
+- Klik **Add** → **Jenkins** → isi:
+  - **Username**: username GitHub kamu
+  - **Password**: bisa isi dengan **Personal Access Token** dari GitHub (bukan password biasa)
+- Klik **Add** dan pilih credential yang baru kamu buat.
+
+> Kalau kamu pakai SSH, kamu bisa tambahkan credential tipe **SSH Username with private key** dan paste private key kamu di sana.
+
+#### 3. **Pilih Branch**
+- Di bagian **Branches to build**, isi:
+  ```
+  */main
+  ```
+  atau sesuai nama branch kamu.
+
+#### 4. **Build Triggers**
+- Centang opsi:
+  ```
+  GitHub hook trigger for GITScm polling
+  ```
+  Ini akan membuat Jenkins merespon otomatis saat ada push dari GitHub.
+
+#### 5. **Tambahkan Webhook di GitHub**
+- Masuk ke repo GitHub kamu → Settings → Webhooks → Add webhook
+- Isi:
+  - **Payload URL**:  
+    ```
+    http://<IP atau domain Jenkins>/github-webhook/
+    ```
+  - **Content type**: `application/json`
+  - **Event**: pilih “Just the push event”
+
+#### 6. **Simpan Konfigurasi**
+- Klik **Save** di bagian bawah halaman Jenkins.
+
+---
+
+Kalau semua sudah diatur, kamu bisa coba push ke GitHub dan lihat apakah Jenkins langsung jalan. Kalau belum, kita bisa cek log atau webhook delivery status di GitHub.
+
+Mau aku bantu cek webhook atau bikin pipeline-nya juga? 😄
+
+
+Siap! Kita bisa bikin pipeline sederhana di Jenkins yang akan otomatis copy file HTML ke folder `C:\jenkinproj` setiap kali ada push ke GitHub. Ini cocok banget buat deploy statis atau preview lokal.
+
+---
+
+### 🚀 Langkah CI/CD HTML Sederhana di Jenkins
+
+#### 1. **Struktur Repo GitHub**
+Pastikan repo kamu punya file seperti:
+```
+index.html
+style.css
+script.js
+```
+Atau folder `html/` berisi file-file tersebut.
+
+#### 2. **Konfigurasi Jenkins Job**
+- Di halaman `Configure` untuk `job1`:
+  - **Source Code Management**: pilih Git dan isi URL repo kamu.
+  - **Branch**: isi `*/main` atau sesuai branch kamu.
+  - **Build Triggers**: centang `GitHub hook trigger for GITScm polling`.
+
+#### 3. **Tambahkan Build Step untuk Copy File**
+Di bagian **Build**, tambahkan step berikut:
+
+##### Jika pakai Freestyle Project:
+- Tambah **Build Step** → **Execute Windows batch command**:
+  ```bat
+  xcopy "%WORKSPACE%\*.html" "C:\jenkinproj" /Y /S /I
+  ```
+
+  Atau kalau file HTML ada di subfolder:
+  ```bat
+  xcopy "%WORKSPACE%\html\*" "C:\jenkinproj" /Y /S /I
+  ```
+
+##### Jika pakai Pipeline Script:
+```groovy
+pipeline {
+  agent any
+  stages {
+    stage('Clone Repo') {
+      steps {
+        git url: 'https://github.com/mhost52/test1.git', branch: 'main'
+      }
+    }
+    stage('Copy HTML') {
+      steps {
+        bat 'xcopy "%WORKSPACE%\\*.html" "C:\\jenkinproj" /Y /S /I'
+      }
+    }
+  }
+}
+```
+
+> Pastikan Jenkins punya akses tulis ke folder `C:\jenkinproj`. Kalau perlu, jalankan Jenkins sebagai admin atau ubah permission folder.
+
+---
+
+Kalau kamu push file baru ke GitHub, Jenkins akan otomatis clone dan copy ke folder tujuan. Mau aku bantu tambahkan validasi file atau auto-refresh browser juga? 😄
+
+
+Perintah `xcopy "%WORKSPACE%\*.html" "C:\jenkinproj" /Y /S /I"` itu dimasukkan sebagai **Build Step** di Jenkins, dan tergantung kamu pakai **Freestyle Project** atau **Pipeline**. Penjelasannya seperti ini:
+
+---
+
+### 🧱 Jika kamu pakai **Freestyle Project**
+- Masuk ke halaman **Configure** untuk `job1`.
+- Scroll ke bagian **Build**.
+- Klik **Add build step** → pilih **Execute Windows batch command**.
+- Di kotak yang muncul, masukkan:
+  ```bat
+  xcopy "%WORKSPACE%\*.html" "C:\jenkinproj" /Y /S /I
+  ```
+- Klik **Save**, lalu coba build.
+
+---
+
+### 📜 Jika kamu pakai **Pipeline Project**
+- Ganti `job1` ke tipe *Pipeline*.
+- Masukkan script seperti ini di bagian **Pipeline script**:
+  ```groovy
+  pipeline {
+    agent any
+    stages {
+      stage('Checkout') {
+        steps {
+          git url: 'https://github.com/mhost52/test1.git', branch: 'main'
+        }
+      }
+      stage('Copy HTML') {
+        steps {
+          bat 'xcopy "%WORKSPACE%\\*.html" "C:\\jenkinproj" /Y /S /I'
+        }
+      }
+    }
+  }
+  ```
+
+---
+
+Kalau kamu masih bingung tipe project yang dipakai, coba lihat bagian atas halaman **Configure**, apakah ada tab seperti “General”, “Build Triggers”, “Build Environment” (itu biasanya Freestyle). Kalau ada tab **Pipeline**, berarti itu tipe pipeline.
+
+Perlu aku bantu ubah job kamu jadi pipeline atau bikin dari awal? 😄
+
+
+Oke, kita pecahkan bareng! Kalau Jenkins tidak otomatis update ke folder `C:\jenkinproj` setelah kamu push ke GitHub, kemungkinan besar masalahnya ada di **trigger webhook** atau **pipeline script**. Yuk kita cek satu per satu:
+
+---
+
+### 🔍 Hal-hal yang Perlu Dicek
+
+#### 1. **Webhook GitHub**
+- Masuk ke GitHub → repo kamu → **Settings** → **Webhooks**
+- Pastikan ada webhook dengan URL:
+  ```
+  http://<IP atau domain Jenkins>/github-webhook/
+  ```
+- Klik webhook tersebut → cek bagian **Recent Deliveries**
+  - Kalau statusnya **Failed**, berarti GitHub tidak bisa menjangkau Jenkins.
+  - Kalau **Delivered**, berarti webhook sudah jalan.
+
+> Kalau Jenkins kamu lokal (localhost), GitHub tidak bisa akses webhook. Solusinya: pakai [ngrok](https://ngrok.com/) untuk expose Jenkins ke internet.
+
+#### 2. **Build Trigger di Jenkins**
+- Di job pipeline kamu (`job1-pipeline`), pastikan bagian **Build Triggers** sudah centang:
+  ```
+  GitHub hook trigger for GITScm polling
+  ```
+
+#### 3. **Pipeline Script Sudah Ada Tahap Copy**
+Pastikan script pipeline kamu punya tahap seperti ini:
+```groovy
+stage('Copy HTML') {
+  steps {
+    bat 'xcopy "%WORKSPACE%\\*.html" "C:\\jenkinproj" /Y /S /I'
+  }
+}
+```
+
+> Kalau folder `jenkinproj` tidak berubah, bisa jadi Jenkins tidak punya izin tulis ke folder tersebut. Coba jalankan Jenkins sebagai administrator.
+
+---
+
+Kalau semua sudah dicek dan masih belum jalan, kamu bisa coba:
+- Push lagi ke GitHub dan lihat apakah job pipeline jalan otomatis.
+- Cek log build terakhir di Jenkins → **Console Output** → cari apakah tahap `Copy HTML` dijalankan.
+
+Mau aku bantu setup ngrok atau cek webhook delivery status bareng? 😄
+
+
+Bisa banget kamu tetap menjalankan logika mirip *pipeline*, walau project-nya bertipe **Freestyle** — tapi tentu ada batasannya. Yuk kita bedah perbedaan dan cara kreatif menyiasatinya:
+
+---
+
+### 🤔 Bedanya Freestyle dan Pipeline Project
+
+| Fitur                         | Freestyle Project            | Pipeline Project               |
+|------------------------------|------------------------------|-------------------------------|
+| UI konfigurasi berbasis form | ✅ Ya                        | ❌ Tidak                       |
+| Script deklaratif            | ❌ Tidak langsung            | ✅ Native dengan Groovy        |
+| Kontrol tahapan build        | Terbatas (build steps linear) | Full control (stages, parallel) |
+| Cocok untuk tugas sederhana  | ✅ Sangat cocok              | Cocok untuk kompleks dan scalable |
+| Gunakan `Jenkinsfile`        | ❌ Tidak langsung            | ✅ Bisa di repo GitHub         |
+
+---
+
+### 🛠️ Cara Meniru Pipeline di Freestyle Project
+
+Meski tidak bisa pakai kode `pipeline { ... }` seperti di Pipeline Project, kamu bisa tetap menjalankan tahapan:
+
+1. **Checkout Source**
+   - Di bagian *Source Code Management*, pilih Git dan isi repo serta branch.
+
+2. **Tambahkan Build Steps Bertahap**
+   - Klik **Add build step** → **Execute Windows batch command**.
+   - Misalnya:
+     ```bat
+     echo --- Copy HTML files ---
+     xcopy "%WORKSPACE%\*.html" "C:\jenkinproj" /Y /S /I
+     ```
+
+   - Tambahkan step lain jika perlu:
+     ```bat
+     echo --- Run Test ---
+     echo (simulasi validasi HTML)
+     ```
+
+3. **Set Trigger Otomatis**
+   - Centang **GitHub hook trigger for GITScm polling**.
+
+---
+
+Kalau proyekmu nantinya makin kompleks (testing, deploy ke server, linting, backup), disarankan migrasi ke Pipeline Project karena jauh lebih fleksibel dan bisa pakai `Jenkinsfile` di GitHub.
+
+Mau aku bantu ubah job-nya ke Pipeline dan tulis `Jenkinsfile` yang otomatis copy, validasi, dan kasih notifikasi? 😄
+
+
+Ada dua kemungkinan besar kenapa Jenkins belum jalan setelah kamu push:
+
+---
+
+### ⏱️ 1. **Kalau Kamu Pakai “Poll SCM”**
+- Jenkins **tidak langsung** jalan saat kamu push.
+- Dia akan **mengecek repo secara berkala** sesuai jadwal yang kamu atur.
+- Contoh jadwal polling setiap 5 menit:
+  ```
+  H/5 * * * *
+  ```
+- Artinya: Jenkins akan cek setiap 5 menit, dan kalau ada perubahan, baru build dijalankan.
+
+> Jadi ya, **ada jeda waktu** kalau kamu pakai Poll SCM. Ini bukan real-time.
+
+---
+
+### ⚡ 2. **Kalau Kamu Pakai “GitHub Hook Trigger”**
+- Seharusnya Jenkins **langsung jalan** saat ada push.
+- Tapi ini hanya berhasil kalau:
+  - Webhook GitHub sudah aktif dan benar.
+  - Jenkins bisa diakses dari internet (GitHub harus bisa kirim notifikasi).
+  - URL webhook kamu seperti:
+    ```
+    http://<IP atau domain Jenkins>/github-webhook/
+    ```
+
+> Kalau Jenkins kamu masih di `localhost`, GitHub **tidak bisa kirim webhook**. Solusinya: pakai [ngrok](https://ngrok.com/) untuk expose Jenkins ke publik.
+
+---
+
+### 🔍 Saran Cepat
+- Cek apakah kamu pakai **Poll SCM** atau **GitHub hook trigger**.
+- Kalau pakai Poll SCM, cek jadwalnya di konfigurasi job.
+- Kalau pakai webhook, cek statusnya di GitHub → Settings → Webhooks → Recent Deliveries.
+
+Mau aku bantu setup webhook dengan ngrok atau ubah jadwal polling biar lebih cepat? 😄
+
+
+Untuk memasang webhook GitHub agar bisa trigger Jenkins otomatis saat ada push, kamu bisa ikuti langkah-langkah berikut:
+
+---
+
+### 🔧 1. **Aktifkan Plugin GitHub di Jenkins**
+- Masuk ke Jenkins → **Manage Jenkins** → **Manage Plugins**
+- Cari dan install plugin: **GitHub plugin** dan **GitHub Integration Plugin**
+
+---
+
+### 🛠️ 2. **Konfigurasi Job Jenkins**
+- Buat atau edit job Jenkins kamu
+- Di bagian **Build Triggers**, centang:
+  ```
+  GitHub hook trigger for GITScm polling
+  ```
+- Pastikan repository GitHub sudah dikonfigurasi di bagian **Source Code Management**
+
+---
+
+### 🌐 3. **Expose Jenkins ke Internet (Kalau Lokal)**
+- Kalau Jenkins kamu jalan di lokal (localhost), GitHub tidak bisa akses webhook-nya
+- Solusi: pakai [ngrok](https://ngrok.com/) atau alternatif seperti serveo atau SocketXP
+  ```
+  ngrok http 8080
+  ```
+- Copy URL forwarding dari ngrok, misalnya:
+  ```
+  https://abc123.ngrok.io
+  ```
+
+---
+
+### 🔗 4. **Tambahkan Webhook di GitHub**
+- Masuk ke repo GitHub → **Settings** → **Webhooks**
+- Klik **Add webhook**
+- Isi:
+  - **Payload URL**: `https://abc123.ngrok.io/github-webhook/`
+  - **Content type**: `application/json`
+  - **Trigger**: pilih “Just the push event”
+- Klik **Add webhook**
+
+---
+
+### ✅ 5. **Tes Webhook**
+- Lakukan push ke repo GitHub
+- Cek di Jenkins apakah job langsung jalan
+- Di GitHub → Webhooks → “Recent Deliveries” bisa lihat status webhook
+
+---
+
+Kalau kamu mau lihat tutorial video, ini salah satu yang bagus:  
+👉 [Cara Integrasi Jenkins dengan GitHub dan Setup Webhook](https://www.youtube.com/watch?v=bE_vbKI3FrU)
+
+Mau aku bantu setup webhook-nya langsung atau troubleshoot kalau belum jalan? 😄
+
+
+Mantap! Kalau kamu sudah install **Ngrok via Microsoft Store**, kamu tinggal lanjut ke tahap konfigurasi dan penggunaan. Berikut langkah-langkahnya supaya bisa langsung dipakai untuk webhook GitHub ke Jenkins:
+
+---
+
+### ✅ 1. **Cek Instalasi Ngrok**
+Buka Command Prompt dan jalankan:
+```bash
+ngrok version
+```
+Kalau muncul versi Ngrok, berarti instalasi sukses.
+
+---
+
+### 🔐 2. **Tambahkan Authtoken**
+Setelah daftar di [ngrok.com](https://ngrok.com/), kamu akan dapat **authtoken** di dashboard.
+
+Jalankan perintah ini di Command Prompt:
+```bash
+ngrok config add-authtoken <token_kamu>
+```
+Contoh:
+```bash
+ngrok config add-authtoken 1a2b3c4d5e6f7g8h9i0j
+```
+
+---
+
+### 🌐 3. **Expose Jenkins ke Internet**
+Misalnya Jenkins kamu jalan di port `8080`, jalankan:
+```bash
+ngrok http 8080
+```
+
+Ngrok akan menampilkan URL seperti:
+```
+Forwarding https://abc123.ngrok.io -> http://localhost:8080
+```
+
+---
+
+### 🔗 4. **Pasang Webhook di GitHub**
+- Masuk ke repo GitHub → **Settings** → **Webhooks**
+- Klik **Add webhook**
+- Isi:
+  - **Payload URL**: `https://abc123.ngrok.io/github-webhook/`
+  - **Content type**: `application/json`
+  - **Event**: pilih “Just the push event”
+- Klik **Add webhook**
+
+---
+
+### 🧪 5. **Tes Push**
+- Lakukan push ke repo GitHub
+- Cek di Jenkins apakah job langsung jalan
+- Cek di GitHub → Webhooks → Recent Deliveries → statusnya harus **Delivered**
+
+---
+
+Kalau kamu mau webhook-nya tetap aktif meski restart komputer, kamu bisa upgrade ke versi Pro atau pakai metode seperti custom domain. Mau aku bantu bikin script otomatis jalanin ngrok saat booting juga? 😄
+
+Perfect! 🎉 Ngrok kamu sudah **aktif dan online**, dan sekarang kamu punya URL publik:
+
+```
+https://7af228651b58.ngrok-free.app
+```
+
+Itu adalah alamat yang bisa diakses GitHub untuk mengirim webhook ke Jenkins kamu. Sekarang kita tinggal **pasang webhook di GitHub** agar setiap push langsung trigger Jenkins.
+
+---
+
+### 🔗 Cara Pasang Webhook GitHub ke Jenkins via Ngrok
+
+#### 1. **Masuk ke GitHub Repo**
+- Buka: `https://github.com/mhost52/test1`
+- Klik tab **Settings** → **Webhooks** → **Add webhook**
+
+#### 2. **Isi Detail Webhook**
+- **Payload URL**:
+  ```
+  https://7af228651b58.ngrok-free.app/github-webhook/
+  ```
+- **Content type**: `application/json`
+- **Events to trigger**: pilih “Just the push event”
+- Klik **Add webhook**
+
+---
+
+### ✅ Pastikan Jenkins Siap Terima Webhook
+- Di Jenkins job kamu (`job1` atau `job1-pipeline`), buka **Configure**
+- Centang:
+  ```
+  GitHub hook trigger for GITScm polling
+  ```
+- Pastikan Jenkins bisa clone repo GitHub (credential sudah benar)
+
+---
+
+### 🧪 Tes Push
+- Lakukan push ke repo GitHub kamu
+- Cek di Jenkins apakah job langsung jalan
+- Di GitHub → Webhooks → klik webhook → lihat **Recent Deliveries**
+  - Status harus **Delivered**
+  - Kalau masih gagal, cek apakah Jenkins menerima request di `http://localhost:8080/github-webhook/`
+
+---
+
+Kalau kamu mau, aku bisa bantu buat job baru yang otomatis copy file HTML ke `C:\jenkinproj` setiap kali ada push. Mau lanjut ke situ? 😄
+
+Kalau kamu ingin alternatif selain **Ngrok** untuk expose Jenkins lokal ke internet agar bisa menerima webhook GitHub, berikut beberapa opsi yang bisa kamu coba:
+
+---
+
+### 🔄 Alternatif Ngrok untuk Tunneling Localhost
+
+| Nama Tool     | Kelebihan Utama | Cara Pakai Singkat |
+|---------------|------------------|---------------------|
+| **Serveo**     | Tidak perlu install software | Jalankan: `ssh -R 80:localhost:8080 serveo.net` |
+| **LocalXpose** | Mendukung HTTP, TCP, UDP | Download client dari [localxpose.io](https://localxpose.io) |
+| **Pinggy**     | Tidak perlu akun, unlimited bandwidth | Jalankan: `ssh -p 443 -R0:localhost:8080 a.pinggy.io` |
+| **LocalTunnel**| Mudah dan open-source | Jalankan: `npx localtunnel --port 8080` |
+| **Pagekite**   | Cocok untuk web server dan SSH | Install dan jalankan: `pagekite.py 8080 yourname.pagekite.me` |
+| **Cloudflare Tunnel (Argo)** | Aman dan bebas DDoS | Konfigurasi via Cloudflare dashboard |
+
+📌 Sumber: [Pinggy Blog – Top 10 Ngrok Alternatives in 2025](https://pinggy.io/blog/best_ngrok_alternatives/)
+
+---
+
+### 🧠 Rekomendasi Buat Kamu
+
+- Kalau kamu ingin **tanpa install software**, coba **Serveo** atau **Pinggy**.
+- Kalau kamu ingin **fitur lengkap dan stabil**, **LocalXpose** atau **Cloudflare Tunnel** sangat cocok.
+- Kalau kamu pakai **Node.js**, **LocalTunnel** bisa langsung jalan dengan `npx`.
+
+---
+
+Mau aku bantu setup salah satu dari ini dan sambungkan ke GitHub webhook? 😄
+
+Ya, kalau kamu pakai **Serveo**, kamu tetap harus **daftarkan URL publik dari Serveo ke webhook GitHub**. Serveo hanya berfungsi sebagai jembatan antara server lokal kamu (misalnya Jenkins di localhost:8080) dan internet.
+
+---
+
+### 🔧 Cara Kerja Serveo + Webhook GitHub
+
+1. **Expose Jenkins ke internet via Serveo**  
+   Jalankan perintah ini di terminal:
+   ```bash
+   ssh -R 80:localhost:8080 serveo.net
+   ```
+   Ini akan membuat URL publik seperti `https://yourname.serveo.net` yang mengarah ke `localhost:8080`.
+
+2. **Salin URL Serveo ke GitHub Webhook**  
+   - Buka repositori GitHub kamu
+   - Masuk ke **Settings > Webhooks**
+   - Klik **Add webhook**
+   - Masukkan URL Serveo tadi, misalnya:  
+     ```
+     https://yourname.serveo.net/github-webhook/
+     ```
+   - Pilih content type: `application/json`
+   - Pilih event yang ingin dipantau (misalnya push)
+   - Simpan webhook
+
+3. **Pastikan Jenkins bisa menerima webhook**  
+   Pastikan Jenkins kamu punya plugin GitHub dan endpoint webhook yang aktif.
+
+---
+
+### ⚠️ Catatan Penting
+
+- Serveo kadang bisa lambat atau tidak stabil karena berbasis SSH tunneling.
+- URL Serveo bisa berubah tiap kali kamu reconnect, kecuali kamu pakai custom subdomain (misalnya `yourname.serveo.net`).
+- Pastikan firewall atau antivirus tidak memblokir koneksi SSH.
+
+---
+
+Kalau kamu mau setup webhook-nya bareng, tinggal bilang aja. Aku bisa bantu dari awal sampai tes webhook-nya jalan 🚀
+
+Kalau kamu pakai **Serveo** untuk expose Jenkins ke internet agar bisa menerima webhook dari GitHub, konfigurasi di Jenkins sebenarnya cukup sederhana. Yang penting adalah memastikan Jenkins bisa menerima request dari URL publik yang diberikan oleh Serveo.
+
+---
+
+### ⚙️ Langkah Konfigurasi Jenkins untuk Webhook via Serveo
+
+#### 1. **Pastikan Jenkins Berjalan di Port Lokal**
+Biasanya Jenkins berjalan di `http://localhost:8080`. Pastikan kamu bisa akses Jenkins secara lokal sebelum lanjut.
+
+#### 2. **Expose Jenkins dengan Serveo**
+Jalankan perintah ini di terminal:
+```bash
+ssh -R 80:localhost:8080 serveo.net
+```
+Kalau berhasil, kamu akan dapat URL seperti:
+```
+Forwarding HTTP traffic from https://yourname.serveo.net
+```
+
+#### 3. **Konfigurasi GitHub Webhook**
+- Masuk ke GitHub repo → **Settings > Webhooks**
+- Tambahkan webhook dengan URL:
+  ```
+  https://yourname.serveo.net/github-webhook/
+  ```
+  atau jika kamu pakai plugin GitHub di Jenkins:
+  ```
+  https://yourname.serveo.net/github-webhook/
+  ```
+  (pastikan endpoint ini sesuai dengan yang Jenkins butuhkan)
+
+#### 4. **Install dan Konfigurasi Plugin GitHub di Jenkins**
+- Pastikan plugin **GitHub Integration** dan **GitHub Plugin** sudah terpasang.
+- Di Jenkins job kamu:
+  - Pilih **"GitHub hook trigger for GITScm polling"**
+  - Pastikan repository GitHub sudah terhubung di konfigurasi SCM
+
+#### 5. **Cek Endpoint Webhook di Jenkins**
+- Jenkins biasanya menyediakan endpoint di:
+  ```
+  http://localhost:8080/github-webhook/
+  ```
+  Jadi URL Serveo akan meneruskan ke sana.
+
+#### 6. **Tes Webhook dari GitHub**
+- Di GitHub webhook settings, klik **"Test webhook"**
+- Cek di Jenkins apakah build triggered
+- Cek log di GitHub webhook apakah statusnya `200 OK`
+
+---
+
+### 🧠 Tips Tambahan
+
+- Kalau kamu ingin URL Serveo tetap sama, gunakan custom subdomain:
+  ```bash
+  ssh -R yourname.serveo.net:80:localhost:8080 serveo.net
+  ```
+- Pastikan Jenkins tidak pakai CSRF protection yang menghalangi webhook (bisa dimatikan sementara di **Manage Jenkins > Configure Global Security**)
+
+---
+
+Mau aku bantu cek konfigurasi job Jenkins kamu biar webhook-nya langsung jalan? 😄
+
+Ya, **Jenkins bisa digunakan di Linux** dan bahkan sangat populer di lingkungan Linux untuk keperluan CI/CD. Jenkins adalah aplikasi berbasis Java, jadi bisa dijalankan di berbagai sistem operasi termasuk:
+
+- ✅ **Ubuntu / Debian**
+- ✅ **Fedora / CentOS / RHEL**
+- ✅ **Arch / Manjaro**
+- ✅ **Linux server di cloud (AWS, DigitalOcean, dll)**
+
+---
+
+### 🧰 Cara Instal Jenkins di Linux (Contoh: Ubuntu)
+
+Berikut langkah-langkah umum instalasi di Ubuntu:
+
+```bash
+# 1. Update sistem dan install Java
+sudo apt update
+sudo apt install openjdk-11-jdk
+
+# 2. Tambahkan repository Jenkins
+wget -O /etc/apt/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+# 3. Install Jenkins
+sudo apt update
+sudo apt install jenkins
+
+# 4. Start Jenkins
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+```
+
+Setelah itu, kamu bisa akses Jenkins di browser:
+```
+http://localhost:8080
+```
+
+---
+
+### 🎥 Video Tutorial
+Kalau kamu mau lihat langkah-langkahnya secara visual, ini video yang sangat membantu:
+- [Cara install Jenkins di Ubuntu 22.04 (YouTube)](https://www.youtube.com/watch?v=ldPKBZkXDpA)
+
+---
+
+Kalau kamu pakai Linux dan ingin Jenkins otomatis deploy HTML ke folder tertentu, kita bisa lanjut setup pipeline atau Freestyle job. Mau aku bantu lanjut ke sana? 😄
+
+
+----------------------------USE JOBS---------------------------
+
+
+Betul banget! 👷‍♂️ Untuk memulai di Jenkins, langkah pertama adalah membuat **New Item**. Ini akan jadi dasar pipeline kamu. Berikut langkah-langkahnya:
+
+---
+
+### 🛠️ Langkah Membuat New Item di Jenkins
+
+1. **Buka Jenkins Dashboard**
+   - Masuk ke Jenkins melalui browser (biasanya `http://localhost:8080` atau URL server kamu).
+
+2. **Klik “New Item”**
+   - Tombol ini ada di sisi kiri atas dashboard.
+
+3. **Masukkan Nama Proyek**
+   - Contoh: `copy-html-to-jenkinproj`
+
+4. **Pilih Jenis Proyek**
+   - Kalau kamu ingin pakai pipeline berbasis script, pilih **“Pipeline”**
+   - Kalau kamu ingin pakai freestyle job (lebih visual), pilih **“Freestyle project”**
+
+5. **Klik OK**
+
+---
+
+### ⚙️ Konfigurasi Pipeline (Jika Pilih “Pipeline”)
+
+Setelah klik OK:
+
+- Masuk ke tab **Pipeline**
+- Di bagian **Pipeline script**, masukkan kode seperti ini:
+
+```groovy
+pipeline {
+  agent any
+  stages {
+    stage('Copy HTML') {
+      steps {
+        bat 'xcopy "%WORKSPACE%\\xxx.html" "C:\\jenkinproj" /Y /I'
+      }
+    }
+  }
+}
+```
+
+📌 Pastikan file `xxx.html` sudah ada di workspace Jenkins (misalnya hasil checkout dari Git repo).
+
+---
+
+### 💡 Tips Tambahan
+
+- Kalau kamu pakai Git, tambahkan stage checkout:
+  ```groovy
+  stage('Checkout') {
+    steps {
+      git 'https://github.com/username/repo.git'
+    }
+  }
+  ```
+- Kalau folder `C:\jenkinproj` belum ada, kamu bisa tambahkan:
+  ```groovy
+  bat 'mkdir C:\\jenkinproj'
+  ```
+
+---
+
+Mau aku bantu bikin pipeline lengkap dari awal, termasuk checkout dari Git dan copy file? Atau kamu pakai freestyle project dulu?
+
+Terima kasih sudah kirim log-nya! 🔍 Dari error tersebut, masalah utamanya adalah **autentikasi Git gagal** karena Jenkins tidak bisa login ke GitHub menggunakan metode yang kamu pakai.
+
+---
+
+### ❌ Masalah Utama
+
+```
+fatal: Authentication failed for 'https://github.com/username/repo.git/'
+remote: Invalid username or token. Password authentication is not supported for Git operations.
+```
+
+GitHub **tidak lagi mendukung password login** untuk Git clone. Kamu harus menggunakan **Personal Access Token (PAT)** atau **SSH key**.
+
+---
+
+### ✅ Solusi: Gunakan Personal Access Token (PAT)
+
+Berikut langkah-langkah untuk memperbaiki:
+
+---
+
+#### 1. 🔐 Buat Personal Access Token di GitHub
+
+- Masuk ke GitHub
+- Klik foto profil → **Settings**
+- Masuk ke **Developer Settings** → **Personal Access Tokens**
+- Klik **Generate new token**
+  - Pilih scope: `repo`, `workflow`
+  - Salin token yang muncul (hanya ditampilkan sekali!)
+
+---
+
+#### 2. 🧰 Tambahkan Credential di Jenkins
+
+- Buka Jenkins Dashboard
+- Masuk ke **Manage Jenkins** → **Credentials**
+- Pilih domain (atau buat global)
+- Klik **Add Credentials**
+  - **Kind**: Username with password
+  - **Username**: GitHub username kamu
+  - **Password**: Paste token GitHub
+  - **ID**: Misalnya `github-token`
+
+---
+
+#### 3. 🛠️ Ubah Jenkinsfile
+
+Tambahkan `credentialsId` ke bagian `git`:
+
+```groovy
+stage('Checkout') {
+  steps {
+    git credentialsId: 'github-token', branch: 'main', url: 'https://github.com/username/repo.git'
+  }
+}
+```
+
+---
+
+### 🔁 Alternatif: Pakai SSH Key
+
+Kalau kamu lebih suka SSH, kamu bisa:
+
+- Tambahkan SSH key ke GitHub
+- Tambahkan private key ke Jenkins Credentials
+- Ubah URL repo jadi `git@github.com:username/repo.git`
+
+---
+
+Setelah kamu tambahkan credentials, pipeline akan bisa checkout repo dengan sukses dan lanjut ke tahap copy file.
+
+Mau aku bantu setup SSH key juga, atau kamu lanjut dengan token dulu?
+
+Siap! 🚀 Kita akan bikin pipeline Jenkins lengkap yang:
+
+1. **Trigger otomatis saat kamu push ke Git**
+2. **Checkout source code dari repo**
+3. **Copy file `xxx.html` ke folder `C:\jenkinproj`**
+
+---
+
+### 🧱 Struktur Pipeline Lengkap (Jenkinsfile)
+
+```groovy
+pipeline {
+  agent any
+
+  triggers {
+    pollSCM('* * * * *') // Cek Git setiap menit (bisa diubah)
+  }
+
+  stages {
+    stage('Checkout') {
+      steps {
+        git branch: 'main', url: 'https://github.com/username/repo.git'
+      }
+    }
+
+    stage('Prepare Folder') {
+      steps {
+        bat 'if not exist "C:\\jenkinproj" mkdir C:\\jenkinproj'
+      }
+    }
+
+    stage('Copy HTML') {
+      steps {
+        bat 'xcopy "%WORKSPACE%\\xxx.html" "C:\\jenkinproj" /Y /I'
+      }
+    }
+  }
+}
+```
+
+---
+
+### 🧠 Penjelasan
+
+| Bagian         | Fungsi                                                                 |
+|----------------|------------------------------------------------------------------------|
+| `triggers`     | Mengaktifkan pipeline otomatis saat ada perubahan di Git              |
+| `git`          | Checkout source code dari GitHub (ganti URL dan branch sesuai repo)   |
+| `Prepare Folder` | Membuat folder `jenkinproj` jika belum ada                          |
+| `xcopy`        | Menyalin file `xxx.html` ke folder tujuan                             |
+
+---
+
+### 🔐 Pastikan:
+
+- Jenkins punya akses ke GitHub (bisa public repo atau pakai credentials)
+- File `xxx.html` memang ada di repo kamu
+- Folder `C:\jenkinproj` bisa ditulis oleh Jenkins (izin akses OK)
+
+---
+
+### 📦 Simpan sebagai `Jenkinsfile`
+
+Letakkan file ini di root folder Git kamu, lalu push ke GitHub. Jenkins akan otomatis membaca dan menjalankan pipeline saat ada perubahan.
+
+---
+
+Kalau kamu mau pakai webhook GitHub biar lebih efisien daripada polling tiap menit, aku bisa bantu setup juga. Mau lanjut ke sana?
